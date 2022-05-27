@@ -4,8 +4,12 @@ import java.io.*;
 public class perhitunganGaji {
 
     public static void main(String []args){
-        int anak, gol, marital, gaji_kotor, tunj_mrt, tunj_ank;
+        int gol, gaji_kotor, tunj_mrt, tunj_ank, mar, ank;
         double pajak, gaji_bersih;
+
+        int golongan[] = {0, 2000000, 2500000, 3000000, 3500000};
+        int marital[] = {0, 300000, 500000, 800000, 1000000};
+        int anak[] = {0, 1, 2};
 
         BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
         Scanner sc = new Scanner(System.in);
@@ -20,70 +24,42 @@ public class perhitunganGaji {
             Integer.parseInt(buf.readLine());
             System.out.print("Golongan: ");
             gol = sc.nextInt();
-            System.out.print("Status Marital: ");
-            marital = sc.nextInt();
+            System.out.println("Status Marital: (masukan golongan anda, bila belum menikah ketik 0)");
+            mar = sc.nextInt();
             System.out.print("Jumlah Anak: ");
-            anak = sc.nextInt();
+            ank = sc.nextInt();
             System.out.println("----------------------------");
 
             switch (gol){
                 case 1 :
-                    gaji_kotor = 2000000;
+                    gaji_kotor = golongan[gol];
+                    tunj_mrt = marital[mar];
+                    tunj_ank = 500000 * anak[ank];
                     pajak = gaji_kotor * 0.025;
                     break;
                 case 2 :
-                    gaji_kotor = 2500000;
+                    gaji_kotor = golongan[gol];
+                    tunj_mrt = marital[mar];
+                    tunj_ank = 750000 * anak[ank];
                     pajak = gaji_kotor * 0.05;
                     break;
                 case 3 :
-                    gaji_kotor = 3000000;
+                    gaji_kotor = golongan[gol];
+                    tunj_mrt = marital[mar];
+                    tunj_ank = 1000000 * anak[ank];
                     pajak = gaji_kotor * 0.07;
                     break;
                 case 4 :
-                    gaji_kotor = 3500000;
+                    gaji_kotor = golongan[gol];
+                    tunj_mrt = marital[mar];
+                    tunj_ank = 1250000 * anak[ank];
                     pajak = gaji_kotor * 0.1;
                     break;
                 default:
                     gaji_kotor = 0;
-                    pajak = 0;
-            }
-
-            switch (marital){
-                case 1:
-                    tunj_mrt = 300000;
-                    break;
-                case 2:
-                    tunj_mrt = 500000;
-                    break;
-                case 3:
-                    tunj_mrt = 800000;
-                    break;
-                case 4:
-                    tunj_mrt = 1000000;
-                    break;
-                default:
+                    tunj_ank = 0;
                     tunj_mrt = 0;
-                    break;
-            }
-
-            if (gol == 1 && anak == 1) {
-                tunj_ank = 500000;
-            }else if(gol == 1 && anak == 2){
-                tunj_ank = 1000000;
-            }else if(gol == 2 && anak == 1){
-                tunj_ank = 750000;
-            }else if(gol == 2 && anak == 2){
-                tunj_ank = 1500000;
-            }else if(gol == 3 && anak == 1){
-                tunj_ank = 1000000;
-            }else if(gol == 3 && anak == 2){
-                tunj_ank = 2000000;
-            }else if(gol == 4 && anak == 1){
-                tunj_ank = 1250000;
-            }else if(gol == 4 && anak == 2){
-                tunj_ank = 2500000;
-            } else {
-                tunj_ank = 0;
+                    pajak = 0;
             }
 
             gaji_bersih = gaji_kotor + tunj_mrt + tunj_ank - pajak;
@@ -97,6 +73,8 @@ public class perhitunganGaji {
 
         } catch (IOException e){
             System.out.println("Error Input");
+        } catch (Exception e){
+            System.out.println("Terdapat Error");
         }
     }
 }
